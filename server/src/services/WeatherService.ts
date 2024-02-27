@@ -1,21 +1,27 @@
 import axios from "axios"
 import dotenv from 'dotenv'
 import { LocationCoords } from "../../utils/types/DefaultTypes"
+import WeatherResponse from "../models/weather/WeatherResponse"
 
 dotenv.config()
 
 class WeatherService {
-    private BASE_URL: string = `https://api.weatherapi.com/v1/current.json?key=${process.env.API_KEY}`
+    private BASE_CURRENT_URL: string = `https://api.weatherapi.com/v1/current.json?key=${process.env.API_KEY}`
 
-    async getWeatherInfoByQuery(location: string) {
-        const requestString = `${this.BASE_URL}&q=${location}`
-        const weatherData = await axios.get(requestString)
-        return weatherData.data
+    async getWeatherInfoByQuery(location: string): Promise<WeatherResponse> {
+        const requestString = `${this.BASE_CURRENT_URL}&q=${location}`
+        const weatherData = this.getData(requestString)
+        return weatherData
     }
-    async getWeatherInfoByCoords(coords: LocationCoords) {
-       const requestString = `${this.BASE_URL}&q=${coords.lat},${coords.lng}`
-       const weatherData = await axios.get(requestString)
-       return weatherData.data
+    async getWeatherInfoByCoords(coords: LocationCoords): Promise<WeatherResponse> {
+       const requestString = `${this.BASE_CURRENT_URL}&q=${coords.lat},${coords.lng}`
+       const weatherData = this.getData(requestString)
+       return weatherData
+    }
+
+    private async getData(link: string) {
+        const weatherData = await axios.get<WeatherResponse>(link)
+        return weatherData.data
     }
 }
 

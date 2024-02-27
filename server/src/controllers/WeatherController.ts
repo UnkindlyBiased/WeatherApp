@@ -3,7 +3,7 @@ import { IWeatherRequest } from "../../utils/types/FastifyTypes";
 import WeatherService from "../services/WeatherService";
 
 class WeatherController {
-    async getWeatherInfoByQuery(req: IWeatherRequest, reply: FastifyReply) {
+    async getWeatherInfoByQuery(req: IWeatherRequest, reply: FastifyReply): Promise<void> {
         const { location } = req.params
         if (location) {
             const data = await WeatherService.getWeatherInfoByQuery(location)
@@ -11,7 +11,7 @@ class WeatherController {
         }
         reply.send({ error: "No city was given" })
     }
-    async getWeatherInfoByCoords(req: IWeatherRequest, reply: FastifyReply) {
+    async getWeatherInfoByCoords(req: IWeatherRequest, reply: FastifyReply): Promise<void> {
         const { lat, lng } = req.query
         const data = await WeatherService.getWeatherInfoByCoords({
             lat: Number(lat),
