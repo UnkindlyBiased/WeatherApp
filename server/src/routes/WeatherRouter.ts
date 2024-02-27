@@ -3,5 +3,5 @@ import WeatherController from "../controllers/WeatherController";
 
 export default async function WeatherRouter(fastify: FastifyInstance) {
     fastify.get('/:location', WeatherController.getWeatherInfoByQuery)
-    fastify.get('/', WeatherController.getWeatherInfoByLocation)
+    fastify.get('/coords', WeatherController.getWeatherInfoByCoords)
 }

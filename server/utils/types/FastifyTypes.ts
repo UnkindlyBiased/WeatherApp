@@ -1,6 +1,7 @@
 import { FastifyRequest } from "fastify";
-import { IWeatherParams } from "./Types";
+import { IWeatherParams, LocationCoords } from "./DefaultTypes";
 
 export type IWeatherRequest = FastifyRequest<{
-    Params: IWeatherParams
+    Params: IWeatherParams,
+    Querystring: LocationCoords
 }>
