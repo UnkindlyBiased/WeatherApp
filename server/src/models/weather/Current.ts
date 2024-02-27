@@ -1,8 +1,8 @@
 import Condition from "./Condition"
 
 export default interface Current {
-    localtime_epoch: number
-    localtime: string
+    last_updated_epoch: number
+    last_updated: string
     temp_c: number
     temp_f: number
     condition: Condition
