@@ -8,8 +8,12 @@ function useGetWeatherByCity(city: string) {
 
     useEffect(() => {
         async function getData() {
-            const response = await WeatherService.getWeatherByCity(String(city))
-            setWeatherData(response)
+            try {
+                const response = await WeatherService.getWeatherByCity(String(city))
+                setWeatherData(response)
+            } catch(e) {
+                console.log('Error')
+            }
         }
         getData()
     }, [city])
@@ -24,7 +28,6 @@ function useGetWeatherByCoords() {
     useEffect(()=> {
         async function getData() {
             const response = await WeatherService.getWeatherByCoords(location!)
-            console.log(response)
             setWeatherData(response)
         }
         if (location) {

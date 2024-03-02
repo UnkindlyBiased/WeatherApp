@@ -1,9 +1,8 @@
-import './App.css'
 import Header from './components/header/Header'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import TestComp from './components/stuff/Test'
 import CityWeather from './pages/weather/CityWeather'
 import CurrentWeather from './pages/weather/CurrentWeather'
+import MainPage from './pages/main/MainPage'
 
 function App() {
   const router = createBrowserRouter([{
@@ -11,7 +10,7 @@ function App() {
     children: [
       {
         path: '/',
-        element: <TestComp />
+        element: <MainPage />
       },
       {
           path: '/current',
@@ -20,6 +19,9 @@ function App() {
       {
         path: '/weather/:city',
         element: <CityWeather />
+      },
+      {
+        path: '/about'
       }
     ]
   }])
