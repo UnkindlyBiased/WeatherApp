@@ -33,9 +33,4 @@ class WeatherService {
     }
 }
 
-/*
-    TODO: Breaking the DRY principle, as weather data by coordinates and by city's name can be accessed by the same query parameter
-    TODO: Implement DTO for received data :-)
-*/
-
 export default new WeatherService()

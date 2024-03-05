@@ -17,12 +17,19 @@ class WeatherController {
         }
     }
     async getWeatherInfoByCoords(req: WeatherRequest, reply: FastifyReply): Promise<void> {
-        const { lat, lng } = req.query
-        const data = await WeatherService.getWeatherInfoByCoords({
-            lat: Number(lat),
-            lng: Number(lng)
-        })
-        reply.send(data)
+        try {
+            const { lat, lng } = req.query
+            if (lat && lng) {
+                const data = await WeatherService.getWeatherInfoByCoords({
+                    lat: Number(lat),
+                    lng: Number(lng)
+                })
+                reply.send(data)
+            }
+            throw ApiError.BadRequestError("One or more arguments were not given")
+        } catch (e) {
+            reply.send(e)
+        }
     }
 }
 

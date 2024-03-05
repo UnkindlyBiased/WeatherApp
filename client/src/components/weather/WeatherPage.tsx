@@ -1,25 +1,22 @@
 import { WeatherResponse } from "../../types/WeatherResponse"
-import styles from './WeatherPage.module.scss'
+import ErrorComp from "../default/ErrorComp"
+import LoadingComp from "../default/LoadingComp"
+import WeatherLayout from "./inner/WeatherLayout"
 
 type PropsType = {
-    data: WeatherResponse
+    data: WeatherResponse | undefined,
+    isLoading: boolean | undefined,
+    error: boolean | undefined
 }
 
-export default function WeatherPage({data}: PropsType) {
-    if (!data) {
-        return (
-            <div className={styles.loadingSurrounder}>
-                <h1>Is loading...</h1>
-            </div>
-        )
-    }
-    return (
-        <div className={styles.loadedSurrounder}>
-            <div className={styles.title}>
-                <h1>{data.location.name}</h1>
-                <img src={data.current.condition.icon} alt={data.current.condition.text}/>
-            </div>
-            <span>Temperature: {data.current.temp_c} C</span>
-        </div>
+function WeatherPage({data, isLoading, error}: PropsType) {
+    return(
+        <>
+            {data && <WeatherLayout data={data} />}
+            {isLoading && <LoadingComp />}
+            {error && <ErrorComp />}
+        </>
     )
 }
+
+export default WeatherPage

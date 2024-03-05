@@ -1,10 +1,16 @@
-import WeatherPage from "../../components/weather/WeatherPage";
+import ErrorComp from "../../components/default/ErrorComp";
+import LoadingComp from "../../components/default/LoadingComp";
+import WeatherLayout from "../../components/weather/inner/WeatherLayout";
 import { useGetWeatherByCoords } from "../../hooks/useGetWeather";
 
 export default function CurrentWeather() {
-    const weatherData = useGetWeatherByCoords()
+    const { weatherData, isLoading, error } = useGetWeatherByCoords()
 
     return(
-        <WeatherPage data={weatherData!} />
+        <>
+            {isLoading && <LoadingComp />}
+            {error && <ErrorComp />}
+            {weatherData && <WeatherLayout data={weatherData} />}
+        </>
     )
 }
