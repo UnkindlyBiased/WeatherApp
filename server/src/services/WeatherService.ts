@@ -29,6 +29,7 @@ class WeatherService {
 
     private async getData(link: string): Promise<WeatherResponse> {
         const weatherData = await axios.get<WeatherResponse>(link)
+        console.log(weatherData.data)
         return weatherData.data
     }
 }

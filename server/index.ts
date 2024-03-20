@@ -2,7 +2,6 @@ import Fastify from "fastify"
 import WeatherRouter from "./src/routes/WeatherRouter"
 import dotenv from 'dotenv'
 import cors from '@fastify/cors'
-import mongoose from "mongoose"
 
 dotenv.config()
 
